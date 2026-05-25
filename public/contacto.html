@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Contacto - Kevin González</title>
+    <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
     <header>
@@ -16,21 +17,17 @@
     </header>
 
     <main>
-        <section>
+        <section id="seccionContacto">
             <h2>Contacto</h2>
-            <p>¿Tienes un proyecto en mente o quieres saber más sobre mi trabajo? Escríbeme.</p>
-
-            <form action="#" method="POST">
+            <p>¿Tienes un proyecto o una idea? Escríbeme, estaré encantado de responderte.</p>
+            <form id="formContacto" action="procesarContacto.php" method="post">
                 <label for="campoNombre">Nombre</label>
                 <input type="text" id="campoNombre" name="nombre" required>
-
-                <label for="campoEmail">Email</label>
+                <label for="campoEmail">Correo electrónico</label>
                 <input type="email" id="campoEmail" name="email" required>
-
                 <label for="campoMensaje">Mensaje</label>
                 <textarea id="campoMensaje" name="mensaje" rows="5" required></textarea>
-
-                <button type="submit">Enviar mensaje</button>
+                <button type="submit">Enviar</button>
             </form>
         </section>
     </main>
@@ -38,5 +35,7 @@
     <footer>
         <p>Kevin González - 2026</p>
     </footer>
+
+    <script src="../assets/js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS portfolio CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE portfolio;
+
+CREATE TABLE proyectos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    titulo VARCHAR(100) NOT NULL,
+    descripcion TEXT NOT NULL,
+    tecnologia VARCHAR(100),
+    fechaCreacion DATE DEFAULT (CURRENT_DATE)
+);
+
+CREATE TABLE mensajes (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL,
+    email VARCHAR(255) NOT NULL,
+    mensaje TEXT NOT NULL,
+    fechaEnvio TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
