@@ -1,2 +1,2 @@
 # portfolio-tfg
-Proyecto Final para mi FP DAW 2
+Proyecto final DAW - Portfolio personal
