@@ -1,27 +1,27 @@
 <?php
-require_once "../includes/conexion.php";
 
-if (!isset($pdo)) {
-    die("❌ No se pudo incluir la conexión.");
-}
+require_once '../includes/conexion.php';
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nombre  = trim($_POST['nombre'] ?? '');
+    $email   = trim($_POST['email'] ?? '');
+    $mensaje = trim($_POST['mensaje'] ?? '');
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nombre = trim($_POST["nombre"] ?? '');
-    $email = trim($_POST["email"] ?? '');
-    $mensaje = trim($_POST["mensaje"] ?? '');
-
-    if ($nombre && $email && $mensaje) {
-        $sql = "INSERT INTO mensajes (nombre, email, mensaje) VALUES (:nombre, :email, :mensaje)";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([
-            ':nombre' => $nombre,
-            ':email' => $email,
-            ':mensaje' => $mensaje
-        ]);
-        echo "<script>alert('Mensaje enviado correctamente.'); window.location.href='contacto.html';</script>";
-    } else {
-        echo "<script>alert('Por favor completa todos los campos.'); history.back();</script>";
+    if (empty($nombre) || empty($email) || empty($mensaje)) {
+        die("Error: Todos los campos son obligatorios.");
     }
+
+    try {
+        $stmt = $pdo->prepare("INSERT INTO mensajes (nombre, email, mensaje) VALUES (?, ?, ?)");
+        $stmt->execute([$nombre, $email, $mensaje]);
+
+        echo "<h2>Mensaje enviado correctamente. Gracias por contactarme.</h2>";
+        echo '<p><a href="contacto.php">Volver al formulario</a></p>';
+    } catch (PDOException $e) {
+        echo "Error al guardar el mensaje: " . $e->getMessage();
+    }
+} else {
+    header("Location: contacto.php");
+    exit;
 }
 ?>
