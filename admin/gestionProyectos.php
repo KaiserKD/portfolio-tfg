@@ -38,35 +38,55 @@ $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <h2>Gestionar Proyectos</h2>
 
             <?php if (!empty($mensajeExito)): ?>
-                <p>
-                    <?= $mensajeExito ?>
-                </p>
+                <p><?= $mensajeExito ?></p>
             <?php endif; ?>
 
             <h3>Añadir Nuevo Proyecto</h3>
             <form action="procesarProyecto.php" method="post">
                 <label for="campoTitulo">Nombre del proyecto</label>
-                <input type="text" id="campoTitulo" name="titulo" 
-                    value="<?= htmlspecialchars($titulo ?? '') ?>">
-                <?php if (isset($errores['titulo'])): ?>
-                    <span><?= $errores['titulo'] ?></span>
-                <?php endif; ?>
+                <input type="text" id="campoTitulo" name="titulo" value="<?= htmlspecialchars($titulo ?? '') ?>">
+                <?php if (isset($errores['titulo'])): ?><span><?= $errores['titulo'] ?></span><?php endif; ?>
 
                 <label for="campoDescripcion">Descripción</label>
                 <textarea id="campoDescripcion" name="descripcion" rows="4"><?= htmlspecialchars($descripcion ?? '') ?></textarea>
-                <?php if (isset($errores['descripcion'])): ?>
-                    <span><?= $errores['descripcion'] ?></span>
-                <?php endif; ?>
+                <?php if (isset($errores['descripcion'])): ?><span><?= $errores['descripcion'] ?></span><?php endif; ?>
 
                 <label for="campoTecnologias">Tecnologias</label>
-                <input type="text" id="campoTecnologias" name="tecnologias" 
-                    value="<?= htmlspecialchars($tecnologias ?? '') ?>" placeholder="HTML5, CSS3, PHP...">
-                <?php if (isset($errores['tecnologias'])): ?>
-                    <span><?= $errores['tecnologias'] ?></span>
-                <?php endif; ?>
+                <input type="text" id="campoTecnologias" name="tecnologias" value="<?= htmlspecialchars($tecnologias ?? '') ?>" placeholder="HTML5, CSS3, PHP...">
+                <?php if (isset($errores['tecnologias'])): ?><span><?= $errores['tecnologias'] ?></span><?php endif; ?>
                 
                 <button type="submit" name="accion" value="crear">Crear Proyecto</button>
             </form>
+
+            <hr>
+
+            <h3>Editar Proyecto</h3>
+            <form action="procesarProyecto.php" method="post">
+                <select name="id" required>
+                    <option value="">Selecciona un proyecto para actualizar</option>
+                    <?php foreach ($proyectos as $p): ?>
+                        <option value="<?= $p['id'] ?>"><?= htmlspecialchars($p['titulo']) ?></option>
+                    <?php endforeach; ?>
+                </select>
+                <button type="submit" name="accion" value="cargarEditar">Cargar para Editar</button>
+            </form>
+
+            <?php if (isset($proyectoEditar)): ?>
+                <h3>Editando: <?= htmlspecialchars($proyectoEditar['titulo']) ?></h3>
+                <form action="procesarProyecto.php" method="post">
+                    <input type="hidden" name="id" value="<?= $proyectoEditar['id'] ?>">
+                    <label for="campoTitulo">Nombre del proyecto</label>
+                    <input type="text" name="titulo" value="<?= htmlspecialchars($proyectoEditar['titulo']) ?>" required>
+
+                    <label for="campoDescripcion">Descripción</label>
+                    <textarea name="descripcion" rows="4" required><?= htmlspecialchars($proyectoEditar['descripcion']) ?></textarea>
+
+                    <label for="campoTecnologias">Tecnologias</label>
+                    <input type="text" name="tecnologias" value="<?= htmlspecialchars($proyectoEditar['tecnologias']) ?>" required>
+
+                    <button type="submit" name="accion" value="actualizar">Guardar Cambios</button>
+                </form>
+            <?php endif; ?>
 
             <hr>
             <h3>Proyectos Existentes (<?= count($proyectos) ?>)</h3>

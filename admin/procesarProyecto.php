@@ -41,6 +41,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->execute([$id]);
             $mensajeExito = "Has eliminado un proyecto.";
         }
+    } 
+    elseif ($accion === 'cargarEditar') {
+        $id = (int)$_POST['id'];
+        $stmt = $pdo->prepare("SELECT * FROM proyectos WHERE id = ?");
+        $stmt->execute([$id]);
+        $proyectoEditar = $stmt->fetch(PDO::FETCH_ASSOC);
+    } 
+    elseif ($accion === 'actualizar') {
+        $id           = (int)$_POST['id'];
+        $titulo       = trim($_POST['titulo'] ?? '');
+        $descripcion  = trim($_POST['descripcion'] ?? '');
+        $tecnologias  = trim($_POST['tecnologias'] ?? '');
+
+        if (empty($titulo)) $errores['titulo'] = "El nombre del proyecto es necesario";
+        if (empty($descripcion)) $errores['descripcion'] = "La descripción del proyecto es necesaria";
+        if (empty($tecnologias)) $errores['tecnologias'] = "Las tecnologías son necesarias";
+
+        if (empty($errores) && $id > 0) {
+            $stmt = $pdo->prepare("UPDATE proyectos SET titulo=?, descripcion=?, tecnologias=? WHERE id=?");
+            $stmt->execute([$titulo, $descripcion, $tecnologias, $id]);
+            $mensajeExito = "Has actualizado un proyecto.";
+        }
     }
 }
 
