@@ -1,5 +1,7 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (!isset($_SESSION['admin'])) {
     header("Location: ../login.php");
@@ -8,32 +10,39 @@ if (!isset($_SESSION['admin'])) {
 
 require_once '../includes/conexion.php';
 
+$errores = [];
+$mensajeExito = "";
+$accion = $_POST['accion'] ?? '';
+
+$titulo = $descripcion = $tecnologias = "";
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $accion = $_POST['accion'] ?? '';
 
     if ($accion === 'crear') {
         $titulo       = trim($_POST['titulo'] ?? '');
         $descripcion  = trim($_POST['descripcion'] ?? '');
         $tecnologias  = trim($_POST['tecnologias'] ?? '');
 
-        if (!empty($titulo) && !empty($descripcion)) {
+        if (empty($titulo)) $errores['titulo'] = "El nombre del proyecto es necesario";
+        if (empty($descripcion)) $errores['descripcion'] = "La descripción del proyecto es necesaria";
+        if (empty($tecnologias)) $errores['tecnologias'] = "Las tecnologías son necesarias";
+
+        if (empty($errores)) {
             $stmt = $pdo->prepare("INSERT INTO proyectos (titulo, descripcion, tecnologias) VALUES (?, ?, ?)");
             $stmt->execute([$titulo, $descripcion, $tecnologias]);
-            echo "<h2>Proyecto añadido correctamente.</h2>";
+            $mensajeExito = "Has creado un proyecto.";
+            $titulo = $descripcion = $tecnologias = "";
         }
     } 
     elseif ($accion === 'eliminar') {
-        $id = $_POST['id'] ?? 0;
+        $id = (int)$_POST['id'];
         if ($id > 0) {
             $stmt = $pdo->prepare("DELETE FROM proyectos WHERE id = ?");
             $stmt->execute([$id]);
-            echo "<h2>Proyecto eliminado correctamente.</h2>";
+            $mensajeExito = "Has eliminado un proyecto.";
         }
     }
-
-    echo '<p><a href="gestionProyectos.php">Volver a Gestión de Proyectos</a></p>';
-} else {
-    header("Location: gestionProyectos.php");
-    exit;
 }
+
+include 'gestionProyectos.php';
 ?>

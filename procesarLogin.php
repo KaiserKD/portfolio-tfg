@@ -1,20 +1,32 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$errores = [];
+$usuario = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $usuario  = trim($_POST['usuario'] ?? '');
-    $password = trim($_POST['password'] ?? '');
+    $usuario   = trim($_POST['usuario'] ?? '');
+    $password  = trim($_POST['password'] ?? '');
 
-    if ($usuario === 'admin' && $password === 'admin123') {
-        $_SESSION['admin'] = true;
-        header("Location: admin/panelAdmin.php");
-        exit;
-    } else {
-        echo "<h2>Usuario o contraseña incorrectos</h2>";
-        echo '<p><a href="login.php">Volver al login</a></p>';
+    if (empty($usuario)) {
+        $errores['usuario'] = "Es necesario el nombre de usuario";
     }
-} else {
-    header("Location: login.php");
-    exit;
+    if (empty($password)) {
+        $errores['password'] = "Es necesario una contraseña";
+    }
+
+    if (empty($errores)) {
+        if ($usuario === 'admin' && $password === 'admin123') {
+            $_SESSION['admin'] = true;
+            header("Location: admin/panelAdmin.php");
+            exit;
+        } else {
+            $errores['general'] = "Datos incorrectos";
+        }
+    }
 }
+
+include 'login.php';
 ?>

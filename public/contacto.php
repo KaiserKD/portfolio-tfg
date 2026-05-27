@@ -21,18 +21,35 @@
     <main>
         <section id="seccionContacto">
             <h2>Contacto</h2>
-            <p>¿Tienes un proyecto o quieres colaborar? Escríbeme y te responderé lo antes posible.</p>
+            <p>¿Tienes un proyecto o quieres colaborar? Escríbeme.</p>
             
+            <?php if (!empty($mensajeExito)): ?>
+                <p>
+                    <?= $mensajeExito ?>
+                </p>
+            <?php endif; ?>
+
             <form id="formularioContacto" action="procesarContacto.php" method="post">
                 <label for="campoNombre">Nombre completo</label>
-                <input type="text" id="campoNombre" name="nombre" required>
-                
+                <input type="text" id="campoNombre" name="nombre" 
+                value="<?= htmlspecialchars($nombre ?? '') ?>">
+                <?php if (isset($errores['nombre'])): ?>
+                    <span><?= $errores['nombre'] ?></span>
+                <?php endif; ?>
+
                 <label for="campoEmail">Correo electrónico</label>
-                <input type="email" id="campoEmail" name="email" required>
-                
+                <input type="email" id="campoEmail" name="email" 
+                value="<?= htmlspecialchars($email ?? '') ?>">
+                <?php if (isset($errores['email'])): ?>
+                    <span><?= $errores['email'] ?></span>
+                <?php endif; ?>
+
                 <label for="campoMensaje">Mensaje</label>
-                <textarea id="campoMensaje" name="mensaje" rows="6" required></textarea>
-                
+                <textarea id="campoMensaje" name="mensaje" rows="6"><?= htmlspecialchars($mensaje ?? '') ?></textarea>
+                <?php if (isset($errores['mensaje'])): ?>
+                    <span><?= $errores['mensaje'] ?></span>
+                <?php endif; ?>
+
                 <button type="submit">Enviar Mensaje</button>
             </form>
         </section>

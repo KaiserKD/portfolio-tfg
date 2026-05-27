@@ -1,10 +1,15 @@
 <?php
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if (isset($_SESSION['admin'])) {
     header("Location: admin/panelAdmin.php");
     exit;
 }
+
+$usuario = isset($usuario) ? $usuario : "";
+$errores = isset($errores) ? $errores : [];
 ?>
 
 <!DOCTYPE html>
@@ -24,15 +29,29 @@ if (isset($_SESSION['admin'])) {
     <main>
         <section id="seccionLogin">
             <h2>Iniciar Sesión</h2>
-            
+
             <form action="procesarLogin.php" method="post">
-                <label for="campoUsuario">Usuario</label>
-                <input type="text" id="campoUsuario" name="usuario" required>
-                
+                <label for="campoUsuario">Nombre de usuario</label>
+                <input type="text" id="campoUsuario" name="usuario" 
+                    value="<?= htmlspecialchars($usuario ?? '') ?>">
+                <?php if (isset($errores['usuario'])): ?>
+                    <span><?= $errores['usuario'] ?></span>
+                <?php endif; ?>
+
                 <label for="campoPassword">Contraseña</label>
-                <input type="password" id="campoPassword" name="password" required>
-                
-                <button type="submit">Entrar al Panel</button>
+                <input type="password" id="campoPassword" name="password">
+                <?php if (isset($errores['password'])): ?>
+                    <span><?= $errores['password'] ?></span>
+                <?php endif; ?>
+
+                <?php if (isset($errores['general'])): ?>
+                    <p>
+                        <?= $errores['general'] ?>
+                    </p>
+                <?php endif; ?>
+
+                <button type="submit">Entrar al Panel de administrador</button>
+                <a href="public/index.php">Volver al Inicio</a>
             </form>
         </section>
     </main>
