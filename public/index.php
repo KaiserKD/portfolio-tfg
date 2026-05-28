@@ -11,26 +11,41 @@ require_once '../includes/conexion.php';
     <link rel="stylesheet" href="../assets/css/styles.css">
 </head>
 <body>
-    <header>
-        <h1>Kevin Daniel González Vargas</h1>
-        <p>Desarrollador Web Junior</p>
-        <nav>
+    <header id="cabeceraHero">
+        <nav id="menuNavegacion">
             <a href="index.php">Inicio</a>
             <a href="proyectos.php">Proyectos</a>
             <a href="contacto.php">Contacto</a>
             <a href="../login.php">Admin</a>
         </nav>
+        <div id="bloqueHero">
+            <h1 id="tituloHero">Kevin Daniel González Vargas</h1>
+            <p id="subtituloHero">Desarrollador Web Junior</p>
+            <p id="resumenHero">Diseño y desarrollo de aplicaciones web a medida con integraciones robustas y experiencias digitales optimizadas de principio a fin.</p>
+            <a href="proyectos.php" id="enlaceHero">Explorar Proyectos</a>
+        </div>
     </header>
 
-    <main>
+    <main id="contenedorPrincipal">
         <section id="seccionSobreMi">
             <h2>Sobre mí</h2>
-            <p>Soy Kevin Daniel González Vargas, estudiante de 2º DAW en FP Ibaiondo. Me apasiona el desarrollo web full-stack, especialmente crear aplicaciones funcionales con PHP y MySQL.</p>
+            <div id="bloqueBiografia">
+                <p>Soy Kevin Daniel González Vargas, estudiante de 2º DAW en FP Ibaiondo. Me apasiona el desarrollo web full-stack, especialmente crear aplicaciones funcionales con PHP y MySQL.</p>
+                <p>Mi objetivo principal es construir herramientas digitales eficientes utilizando estándares limpios. Me enfoco en resolver lógicas complejas en el lado del servidor mientras diseño interfaces adaptables y atractivas en el lado del cliente.</p>
+            </div>
         </section>
 
         <section id="seccionHabilidades">
             <h2>Habilidades Técnicas</h2>
-            <p>HTML5 • CSS3 • JavaScript • PHP • MySQL • Git • Diseño Responsive</p>
+            <div id="cuadrillaHabilidades">
+                <span class="etiquetaTecnica">HTML5</span>
+                <span class="etiquetaTecnica">CSS3</span>
+                <span class="etiquetaTecnica">JavaScript</span>
+                <span class="etiquetaTecnica">PHP</span>
+                <span class="etiquetaTecnica">MySQL</span>
+                <span class="etiquetaTecnica">Git</span>
+                <span class="etiquetaTecnica">Diseño Responsive</span>
+            </div>
         </section>
     </main>
 
