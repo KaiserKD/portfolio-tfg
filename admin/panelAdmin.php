@@ -17,9 +17,15 @@ if (!isset($_SESSION['admin'])) {
 </head>
 <body>
     <header>
-        <h1>Panel de Administración</h1>
+        <h1 style="margin-top: 30px">Panel de Administración</h1>
         <p>Bienvenido, Kevin</p>
-        <nav>
+        <input type="checkbox" id="activadorMenu">
+        <label for="activadorMenu" id="botonDesplegable">
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+        </label>
+        <nav id="menuNavegacion">
             <a href="panelAdmin.php">Inicio Admin</a>
             <a href="gestionProyectos.php">Gestionar Proyectos</a>
             <a href="gestionMensajes.php">Ver Mensajes</a>

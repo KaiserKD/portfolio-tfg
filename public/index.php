@@ -12,6 +12,12 @@ require_once '../includes/conexion.php';
 </head>
 <body>
     <header id="cabeceraHero">
+        <input type="checkbox" id="activadorMenu">
+        <label for="activadorMenu" id="botonDesplegable">
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+        </label>
         <nav id="menuNavegacion">
             <a href="index.php">Inicio</a>
             <a href="proyectos.php">Proyectos</a>
@@ -31,7 +37,7 @@ require_once '../includes/conexion.php';
             <h2>Sobre mí</h2>
             <div id="bloqueBiografia">
                 <p>Soy Kevin Daniel González Vargas, estudiante de 2º DAW en FP Ibaiondo. Me apasiona el desarrollo web full-stack, especialmente crear aplicaciones funcionales con PHP y MySQL.</p>
-                <p>Mi objetivo principal es construir herramientas digitales eficientes utilizando estándares limpios. Me enfoco en resolver lógicas complejas en el lado del servidor mientras diseño interfaces adaptables y atractivas en el lado del cliente.</p>
+                <p>Mi objetivo principal es construir herramientas digitales eficientes utilizando estándares limpios. Me enfoco en resolver lógicas complejas en el lado del servidor mientras diseño interfaces adaptables and atractivas en el lado del cliente.</p>
             </div>
         </section>
 

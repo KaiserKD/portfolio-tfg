@@ -33,6 +33,7 @@ header {
     justify-content: center;
     border-bottom: 2px solid rgba(249, 168, 212, 0.15);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    position: relative;
 }
 
 header h1 {
@@ -50,6 +51,28 @@ header p {
     color: var(--colorVioleta);
     font-size: 1.05rem;
     font-weight: 500;
+}
+
+#activadorMenu {
+    display: none;
+}
+
+#botonDesplegable {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+.barraIcono {
+    width: 100%;
+    height: 3px;
+    background-color: var(--colorTexto);
+    border-radius: 2px;
+    transition: var(--transicionEfecto);
 }
 
 nav {
@@ -85,6 +108,7 @@ nav a:hover {
     justify-content: space-between;
     align-items: center;
     padding: 2.5rem;
+    position: relative;
     background: radial-gradient(circle at 80% 20%, rgba(196, 181, 253, 0.12), transparent 50%),
                 radial-gradient(circle at 20% 80%, rgba(249, 168, 212, 0.12), transparent 50%),
                 var(--colorBloque);
@@ -240,7 +264,7 @@ h2::after {
     border: 1px solid rgba(255, 255, 255, 0.06);
     border-radius: 18px;
     padding: 2.2rem;
-    margin-bottom: 20px;
+    margin-bottom: 0;
     position: relative;
     overflow: hidden;
     transition: var(--transicionEfecto);
@@ -394,5 +418,41 @@ footer {
     }
     #cabeceraHero {
         padding: 2rem 1rem;
+    }
+    #botonDesplegable {
+        display: flex;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+    }
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 75%;
+        height: 100vh;
+        background-color: var(--colorBloque);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+        transition: var(--transicionEfecto);
+        z-index: 90;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.6);
+        border-left: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    #activadorMenu:checked ~ nav {
+        right: 0;
+    }
+    #activadorMenu:checked ~ #botonDesplegable .barraIcono:nth-child(1) {
+        transform: translateY(9px) rotate(45deg);
+        background-color: var(--colorRosa);
+    }
+    #activadorMenu:checked ~ #botonDesplegable .barraIcono:nth-child(2) {
+        opacity: 0;
+    }
+    #activadorMenu:checked ~ #botonDesplegable .barraIcono:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+        background-color: var(--colorRosa);
     }
 }

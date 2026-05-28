@@ -15,9 +15,15 @@ $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Kevin Daniel González Vargas</h1>
+        <h1 style="margin-top: 30px">Kevin Daniel González Vargas</h1>
         <p>Desarrollador Web Junior</p>
-        <nav>
+        <input type="checkbox" id="activadorMenu">
+        <label for="activadorMenu" id="botonDesplegable">
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+        </label>
+        <nav id="menuNavegacion">
             <a href="index.php">Inicio</a>
             <a href="proyectos.php">Proyectos</a>
             <a href="contacto.php">Contacto</a>

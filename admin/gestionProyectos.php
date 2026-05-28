@@ -24,11 +24,17 @@ $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 </head>
 <body>
     <header>
-        <h1>Panel de Administración</h1>
-        <nav>
-            <a href="panelAdmin.php">Inicio</a>
-            <a href="gestionProyectos.php">Proyectos</a>
-            <a href="gestionMensajes.php">Mensajes</a>
+        <h1 style="margin-top: 30px">Panel de Administración</h1>
+        <input type="checkbox" id="activadorMenu">
+        <label for="activadorMenu" id="botonDesplegable">
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+        </label>
+        <nav id="menuNavegacion">
+            <a href="panelAdmin.php">Inicio Admin</a>
+            <a href="gestionProyectos.php">Gestionar Proyectos</a>
+            <a href="gestionMensajes.php">Ver Mensajes</a>
             <a href="../logout.php">Cerrar Sesión</a>
         </nav>
     </header>
