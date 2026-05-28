@@ -43,9 +43,6 @@ $proyectos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                             <h3><?= htmlspecialchars($proyecto['titulo']) ?></h3>
                             <p><?= htmlspecialchars($proyecto['descripcion']) ?></p>
                             <p><strong>Tecnologías:</strong> <?= htmlspecialchars($proyecto['tecnologias']) ?></p>
-                            <?php if (!empty($proyecto['enlace'])): ?>
-                                <a href="<?= htmlspecialchars($proyecto['enlace']) ?>" target="_blank">Ver proyecto</a>
-                            <?php endif; ?>
                         </article>
                     <?php endforeach; ?>
                 <?php else: ?>
