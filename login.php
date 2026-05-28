@@ -22,8 +22,19 @@ $errores = isset($errores) ? $errores : [];
 </head>
 <body>
     <header>
-        <h1>Panel de Administración</h1>
-        <p>Kevin Daniel González Vargas</p>
+        <h1 style="margin-top: 30px">Panel de Administración</h1>
+        <input type="checkbox" id="activadorMenu">
+        <label for="activadorMenu" id="botonDesplegable">
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+            <span class="barraIcono"></span>
+        </label>
+        <nav id="menuNavegacion">
+            <a href="index.php">Inicio</a>
+            <a href="proyectos.php">Proyectos</a>
+            <a href="contacto.php">Contacto</a>
+            <a href="../login.php">Admin</a>
+        </nav>
     </header>
 
     <main>
@@ -51,7 +62,6 @@ $errores = isset($errores) ? $errores : [];
                 <?php endif; ?>
 
                 <button type="submit">Entrar al Panel de administrador</button>
-                <a href="public/index.php">Volver al Inicio</a>
             </form>
         </section>
     </main>
